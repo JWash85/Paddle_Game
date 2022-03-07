@@ -1,0 +1,21 @@
+/*body{
+    width: 700px;
+    margin:auto;
+    background-color: black;
+}*/
+ 
+ #gameBoard{
+     background-color: black;
+     border: 2px solid white;
+     
+
+ }
+#left-paddle {
+    width: 50px;
+    height: 300px;
+}
+.right-paddle {
+    width: 50px;
+    height: 300px;
+   
+}
