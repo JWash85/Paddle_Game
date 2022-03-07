@@ -115,7 +115,7 @@ function ballWallCollision(){
         ball.x + ball.speed <= playerOne.x + playerOne.width)
     ){
         ball.speed = ball.speed * -1;
-    } else if (ball.x+ball.speed > playerOne.x + playerOne.width){
+    } else if (ball.x+ball.speed < playerOne.x ){
         scoreTwo +=1;
         ball.speed = ball.speed * -1;
         ball.x = 100 + ball.speed;
@@ -136,6 +136,7 @@ function drawElements(){
     drawElement(ball);
     displayScoreOne();
     displayScoreTwo();
+    setWinner()
     //copyImageToCanvas()
 }
 function loop() {
@@ -143,3 +144,11 @@ function loop() {
     window.requestAnimationFrame(loop);
 }
 loop()
+function setWinner(){
+    let winner = document.getElementById("winner");
+    if(scoreOne == '5'){
+        winner.innerText = "Player One Wins!"
+        
+    }else if(scoreTwo == '5')
+        winner.innerText = "Player Two Wins!"
+}
