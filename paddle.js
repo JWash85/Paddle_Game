@@ -1,8 +1,16 @@
 const canvas = document.getElementById("gameBoard");
 const context = canvas.getContext("2d");
 //const leftPaddle = document.getElementById("left-paddle")
-const img = new Image()
-img.src = 'assets/Red Chip.png'
+//setting variables for my images
+let ballB = new Image()
+let leftP = new Image()
+let rightP = new Image()
+
+ballB.src = 'assets/Red Chip.png'
+leftP.src = 'assets/Yellow Chip.png'
+rightP.src = 'assets/Yellow Chip.png'
+
+//img.src = 'assets/Yellow Chip.png'
 /*Context is apart of Canvas API 
     Canvas API used for drawing graphics via JavaScript & HTML
     Can be used for animaiton, game graphics, data visualization,
@@ -27,6 +35,7 @@ function doKeyDown(e) {
 }
 class Element{
     constructor(options){
+        this.i = options.i;
         this.x = options.x;
         this.y = options.y;
         this.width = options.width;
@@ -70,12 +79,13 @@ const ball = new Element({
 
 });
 
-/*function copyImageToCanvas() {
-    context.drawImage(
-        img, 10, 200,  50, 50
-    )
 
-}*/
+//use image for ball
+function draw(i, x, y, w, h) {
+    context.drawImage(i, x, y,  w, h)
+}
+//use image as paddle
+
 
 function drawElement(element) {
     context.fillStyle = element.color;
@@ -95,7 +105,7 @@ function displayScoreTwo() {
     context.fillText(scoreTwo, canvas.width / 2 + 60, 30);
 }
 //ball bounce
-function ballBounce(){
+/*function ballBounce(){
     if(ball.y + ball.gravity <= 0 || ball.y + ball.gravity >= canvas.height) {
         ball.gravity = ball.gravity * -1;
         ball.y += ball.gravity;
@@ -105,7 +115,25 @@ function ballBounce(){
         ball.x += ball.speed;
     }
     ballWallCollision();
+}*/
+function ballBounce(){
+    if(by + bGravity <= 0 || by + bGravity >= canvas.height) {
+        bGravity = bGravity * -1;
+        by += bGravity;
+        bx += bSpeed;
+    } else {
+        by += bGravity;
+        bx += bSpeed;
+    }
+    ballWallCollision();
 }
+var bx = 400;
+var by = 400/2;
+var bWidth = 50;
+var bHeight = 50;
+var bSpeed = 2;
+var bGravity = 2;
+
 function ballWallCollision(){
     if(
         (ball.y + ball.gravity <= playerTwo.y + playerTwo.height &&
@@ -136,8 +164,10 @@ function drawElements(){
     drawElement(ball);
     displayScoreOne();
     displayScoreTwo();
-    setWinner()
-    //copyImageToCanvas()
+    setWinner();
+    draw(ballB,bx, by, bWidth, bHeight)
+    //draw(leftP, 10, 200, 50, 50 )
+    //draw(rightP, 675, 200, 50, 50 )
 }
 function loop() {
     ballBounce()
@@ -152,3 +182,9 @@ function setWinner(){
     }else if(scoreTwo == '5')
         winner.innerText = "Player Two Wins!"
 }
+var bx = 400;
+var by = 400/2;
+var bWidth = 50;
+var bHeight = 50;
+var bSpeed = 2;
+var bGravity = 2;
