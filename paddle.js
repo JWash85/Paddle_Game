@@ -2,6 +2,8 @@ const canvas = document.getElementById("gameBoard");
 const context = canvas.getContext("2d");
 //const leftPaddle = document.getElementById("left-paddle")
 //setting variables for my images
+//create start button
+
 
 /*Context is apart of Canvas API 
     Canvas API used for drawing graphics via JavaScript & HTML
@@ -10,13 +12,9 @@ const context = canvas.getContext("2d");
 let scoreOne = 0
 let scoreTwo = 0
 
+//Ball image
 let ball = new Image()
-let playerOne = new Image()
-let computer = new Image()
-
 ball.src = 'assets/Red Chip.png'
-playerOne.src = 'assets/Yellow Chip.png'
-computer.src = 'assets/Yellow Chip.png'
 
 //setting Ball Variables
 var bx = canvas.width/2;
@@ -24,20 +22,20 @@ var by = canvas.height/2;
 var bWidth = 50;
 var bHeight = 50;
 var bSpeed = 2;
-var bGravity = 2;
+var bGravity = 5;
 
 //Player 1 Paddle Variables
-var px = 10;
+/*var px = 10;
 var py = canvas.height/2 - 100/2;
 var pWidth = 10;
 var pHeight = 100;
 
 
 //Computer Paddle Variables
-var cx = canvas.width - 20;
+var cx = canvas.width - 80;
 var cy = canvas.height/2 - 100/2;
 var cWidth = 10;
-var cHeight = 100;
+var cHeight = 100;*/
 
 //use image for ball
 function draw(i, x, y, w, h) {
@@ -55,7 +53,6 @@ const net = {
 }
 
 
-
 function drawRect(x,y,w,h, color){
     context.fillStyle = color;
     context.fillRect(x,y,w,h,color);
@@ -65,10 +62,6 @@ function drawNet(){
         drawRect(net.x, net.y + i, net.width, net.height, net.color);
     }
 }
-        
-    
-
-
 
 
 
@@ -86,7 +79,7 @@ function doKeyDown(e) {
     else if (key == "k" && playerTwo.y + playerTwo.height + playerTwo.gravity < canvas.height)
         playerTwo.y += playerTwo.gravity * 15;
 }
-/*class Element{
+class Element{
     constructor(options){
         this.i = options.i;
         this.x = options.x;
@@ -102,8 +95,8 @@ function doKeyDown(e) {
 
 //Creating paddles for each player
 const playerOne = new Element({
-    x: 10,
-    y: 200,
+    x: 1,
+    y: canvas.height/2 - 100/2,
     width: 15,
     height: 80,
     color: "#fff",
@@ -111,9 +104,9 @@ const playerOne = new Element({
 
 });
 
-const playerTwo = new Element({
-    x: 675,
-    y: 200,
+const computer = new Element({
+    x: canvas.width - 16,
+    y: canvas.height/2 - 100/2,
     width: 15,
     height: 80,
     color: "#fff",
@@ -121,7 +114,7 @@ const playerTwo = new Element({
 
 });
 //Created puck
-const ball = new Element({
+/*const ball = new Element({
     x: 675/2,
     y: 400/2,
     width: 15,
@@ -166,8 +159,20 @@ function displayScoreTwo() {
     }
     ballWallCollision();
 }*/
-
+///add eventlistener
 function ballBounce(){
+    if(by + bGravity <= -15 || by + bGravity >= canvas.height -20) {
+        bGravity = bGravity* -1;
+        by += bGravity;
+        bx += bSpeed;
+    } else {
+        by += bGravity;
+        bx += bSpeed;
+    }
+    ballWallCollision();
+}
+
+/*function ballBounce(){
     if(by + bGravity <= 0 || by + bGravity >= canvas.height) {
         bGravity = bGravity * -1;
         by += bGravity;
@@ -177,7 +182,7 @@ function ballBounce(){
         bx += bSpeed;
     }
     ballWallCollision();
-}
+}*/
 
 
 /*function ballWallCollision(){
@@ -203,20 +208,21 @@ function ballBounce(){
     drawElements();
 }*/
 function ballWallCollision(){
-    if(
-        (by + bGravity <= cy + cHeight &&
-        bx + bWidth + bSpeed >= cx &&
-        by + bGravity > cy) ||
-        (by + bGravity > py &&
-        bx + bSpeed <= px + pWidth)
+
+    if( by + bGravity <= computer.y + computer.height &&
+        bx*2 + bWidth + bSpeed >= computer.x &&
+        by + bGravity > computer.y ||
+
+        (by + bGravity >playerOne.y &&
+        bx*2 + bSpeed <= playerOne.x + playerOne.width)
     ){
         bSpeed = bSpeed * -1;
-    } else if (bx+bSpeed < px ){
+    }else if (bx*2+bWidth < playerOne.x){
         scoreTwo +=1;
         bSpeed = bSpeed * -1;
         bx = 100 + bSpeed;
         by += bGravity;
-    }else if (bx+bSpeed > cx + cWidth){
+    }else if (bx*2+bSpeed > computer.x + computer.width){
         scoreOne +=1;
         bSpeed = bSpeed * -1;
         bx = 100 + bSpeed;
@@ -227,15 +233,15 @@ function ballWallCollision(){
 
 function drawElements(){
     context.clearRect(0,0,canvas.width, canvas.height);
-    //drawElement(playerOne);
-    //drawElement(playerTwo);
+    drawElement(playerOne);
+    drawElement(computer);
     //drawElement(ball);
     displayScoreOne();
     displayScoreTwo();
     setWinner();
     draw(ball,bx, by, bWidth, bHeight);
-    draw(playerOne, px, py, pWidth, pHeight);
-    draw(computer, cx, cy, cWidth, cHeight );
+    //draw(playerOne, px, py, pWidth, pHeight);
+    //draw(computer, cx, cy, cWidth, cHeight );
     drawNet();
     drawRect();
 }
@@ -252,3 +258,16 @@ function setWinner(){
     }else if(scoreTwo == '5')
         winner.innerText = "Player Two Wins!"
 }
+
+//adding start game function
+function startGame() {
+    let start = document.getElementById("start");
+    let gameCanvas = document.getElementById("canvas")
+    let gameOver = document.getElementById("game-over");
+    start.style.display = "none";
+    gameCanvas.style.display = "block";
+    gameOver.style.display = "none"
+    
+}
+
+
