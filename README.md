@@ -1,5 +1,10 @@
-# Paddle_Game
-I need 2 paddles
-I need a puck 
-I need a way to keep score
-I need the paddle to move left and right
+#Paddle Game rules; 
+One player game
+Controls for player one
+    "w": up
+    "s": down
+Player one plays against computer, first to 15 wins (score set to 5 for presentation)
+
+References: 
+
+

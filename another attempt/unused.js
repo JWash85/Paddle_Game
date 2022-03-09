@@ -29,8 +29,6 @@ var bGravity = 5;
 var py = canvas.height/2 - 100/2;
 var pWidth = 10;
 var pHeight = 100;
-
-
 //Computer Paddle Variables
 var cx = canvas.width - 80;
 var cy = canvas.height/2 - 100/2;
@@ -122,7 +120,6 @@ const computer = new Element({
     color: "#fff",
     speed: 2,
     gravity: 2
-
 });*/
 
 
@@ -269,5 +266,3 @@ function startGame() {
     gameOver.style.display = "none"
     
 }
-
-
