@@ -11,6 +11,7 @@ const context = canvas.getContext("2d");
     photo manipulation, and real-time video processing*/
 let scoreOne = 0
 let scoreTwo = 0
+let highScore = 5
 
 //Ball image
 let ball = new Image()
@@ -255,6 +256,8 @@ function setWinner(){
     }else if(scoreTwo == '5')
         winner.innerText = "Player Two Wins!"
 }
+
+
 
 //adding start game function
 function startGame() {

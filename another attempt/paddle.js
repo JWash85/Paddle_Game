@@ -1,8 +1,10 @@
 const canvas = document.getElementById("gameBoard");
 const context = canvas.getContext("2d");
 
-let scoreOne = 0
-let scoreTwo = 0
+
+var scoreOne = 0
+var scoreTwo = 0
+
 //key movement for paddles
 window.addEventListener("keypress", pOneControls, false);
 
@@ -95,14 +97,14 @@ function drawElement(element) {
         gravity: 2,
     }
 function update() {
-    score()
+    score();
     ballBounce();
-    //movePaddle(pOne);
-    
+      
     paddleCollision(pOne);
     paddleCollision(comp);
 }
 function render() {
+    movePaddle(comp);
     drawNet();
     gameBall(ball.x, ball.y, ball.size, ball.color);
 }
@@ -151,6 +153,18 @@ function score(){
         scoreTwo += 1
     }
 }
+function setWinner(){
+    let winner = document.getElementsByTagName("h2");
+    if(scoreOne >= '5'){
+        winner.innerText = "Player One Wins!"
+        
+    }else if(scoreTwo >= '5')
+        winner.innerText = "Player Two Wins!"
+}
+setWinner()
+
+
+
 function ballBounce(){
     ball.x = ball.x + ball.velx;
     ball.y = ball.y + ball.vely;
@@ -190,13 +204,16 @@ function paddleCollision(element){
         ball.vely = deltaY(element) * .25;
     }
 }
-//document.getElementById(btn-start).addEventListener('click', function(){
+
 loop = setInterval(() =>{
     movePaddle(comp);
     drawElements();
     update();
     render();
-},1000/60)
+},1000/60);
+
+
+
 
 //})
 
