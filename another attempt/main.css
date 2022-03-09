@@ -1,4 +1,32 @@
-#gameBoard{
-    background-color: black;
-    
+body {
+    width: 800px;
+    margin: auto;
+    display: block;
+    display: center;
+    background-color: rgb(54, 136, 243);
 }
+
+#gameBoard{
+    background-color: rgb(18, 117, 31);
+    margin-bottom: 50px;
+      
+}
+
+#pongLogo {
+    height: 540px;
+    width: 700px;
+    margin-top: -50px;
+    margin-bottom: -60px;
+    margin-left: 40px;
+}
+#btn-start {
+    margin-left: 44%;
+    margin-bottom: 50px;
+    margin-top: -50px;
+    height: 30px;
+    width: 100px;
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+}
+

@@ -4,9 +4,9 @@ const context = canvas.getContext("2d");
 let scoreOne = 0
 let scoreTwo = 0
 //key movement for paddles
-window.addEventListener("keypress", doKeyDown, false);
+window.addEventListener("keypress", pOneControls, false);
 
-function doKeyDown(e){
+function pOneControls(e){
     const key = e.key;
     if(key == "w" && pOne.y-pOne.gravity > 0)
         pOne.y -= pOne.gravity * 4;
@@ -190,6 +190,7 @@ function paddleCollision(element){
         ball.vely = deltaY(element) * .25;
     }
 }
+//document.getElementById(btn-start).addEventListener('click', function(){
 loop = setInterval(() =>{
     movePaddle(comp);
     drawElements();
@@ -197,7 +198,7 @@ loop = setInterval(() =>{
     render();
 },1000/60)
 
-
+//})
 
 
 
