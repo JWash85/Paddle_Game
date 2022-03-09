@@ -14,6 +14,10 @@ function pOneControls(e){
         pOne.y -= pOne.gravity * 4;
     else if (key == "s" && pOne.y + pOne.height + pOne.gravity < canvas.height)
     pOne.y += pOne.gravity * 4;
+    if (key == "i" && comp.y - comp.gravity > 0)
+        comp.y -= comp.gravity * 15;
+    else if (key == "k" && comp.y + comp.height + comp.gravity < canvas.height)
+        comp.y += comp.gravity * 15;
 }
 
 class Element{
@@ -104,7 +108,6 @@ function update() {
     paddleCollision(comp);
 }
 function render() {
-    movePaddle(comp);
     drawNet();
     gameBall(ball.x, ball.y, ball.size, ball.color);
 }
@@ -154,7 +157,7 @@ function score(){
     }
 }
 function setWinner(){
-    let winner = document.getElementsByTagName("h2");
+    let winner = document.getElementById("winner");
     if(scoreOne >= '5'){
         winner.innerText = "Player One Wins!"
         
